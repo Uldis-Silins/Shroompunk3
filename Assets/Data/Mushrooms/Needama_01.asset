@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33634c35ef4433bad6a46b2ed47051d, type: 3}
+  m_Name: Needama_01
+  m_EditorClassIdentifier: Assembly-CSharp::MushroomData
+  <GrowingPrefab>k__BackingField: {fileID: 1864862929309013511, guid: 4c4abc0879fa54a5881e1eef4add88ea, type: 3}
+  <CutTopPrefab>k__BackingField: {fileID: 4426731951840156040, guid: c0391abf222e34cf592ddde544f6eb7b, type: 3}
+  <CutBottomPrefab>k__BackingField: {fileID: 7876747706788527627, guid: 29d140212811d46238a15325b717d03a, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: a22368aaf41bd4d9195f0ae1cc7e6ebd, type: 3}
+  <Value>k__BackingField: 0
+  <Type>k__BackingField: 1
+  <Name>k__BackingField: N01

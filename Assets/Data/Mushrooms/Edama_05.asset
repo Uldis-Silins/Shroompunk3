@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33634c35ef4433bad6a46b2ed47051d, type: 3}
+  m_Name: Edama_05
+  m_EditorClassIdentifier: Assembly-CSharp::MushroomData
+  <GrowingPrefab>k__BackingField: {fileID: 8545785879014061137, guid: 3564c93c2d0194b77813378221af7529, type: 3}
+  <CutTopPrefab>k__BackingField: {fileID: 2859845319907483236, guid: e0b5d50eaf6f44d29858e71bc875a3f3, type: 3}
+  <CutBottomPrefab>k__BackingField: {fileID: 756451095787056531, guid: 498955e49137e44c78aae3f329049204, type: 3}
+  <Icon>k__BackingField: {fileID: 21300000, guid: 5b36aa94e38ba42cb936820daff88a2f, type: 3}
+  <Value>k__BackingField: 30
+  <Type>k__BackingField: 0
+  <Name>k__BackingField: E05
