@@ -89,6 +89,8 @@ public class MushroomSpawner : MonoBehaviour
 
     private float m_spawnTick;
     private float m_spawnTickRate = 2f;
+    
+    private List<Mushroom> m_spawnedMushrooms = new List<Mushroom>();
 
     public bool IsAreaInitialized => m_grid is { Length: > 0 };
     public bool SpawningEnabled { get; set; }
@@ -158,6 +160,7 @@ public class MushroomSpawner : MonoBehaviour
                     shroom.gameObject.AddComponent<ARAnchor>();
                     spawnPoint.spawnedObject = shroom;
                     shroom.Initialize(spawnPoint.mushroomData);
+                    m_spawnedMushrooms.Add(shroom);
                 }
             }
             
@@ -380,6 +383,19 @@ public class MushroomSpawner : MonoBehaviour
         m_spawnPoints.AddRange(spawns);
     }
 
+    public void DespawnMushrooms()
+    {
+        for (int i = m_spawnedMushrooms.Count; --i >= 0;)
+        {
+            if (m_spawnedMushrooms[i] != null)
+            {
+                Destroy(m_spawnedMushrooms[i].gameObject);
+            }
+        }
+        
+        m_spawnedMushrooms.Clear();
+    }
+
     public void SetSpawnChance(float time)
     {
         m_minSpawnChance = m_minSpawnChanceCurve.Evaluate(time) * 100f;
@@ -400,6 +416,12 @@ public class MushroomSpawner : MonoBehaviour
         }
         
         return positions;
+    }
+
+    public void ResetSpawn()
+    {
+        m_spawnTick = 0f;
+        m_spawnPoints.Clear();
     }
 
     public void PickupMushroom(MushroomData data)

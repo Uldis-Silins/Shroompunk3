@@ -30,9 +30,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private InfoPopup m_infoPopup;
     [SerializeField] private MenuState_Results m_results;
     
+    private Coroutine m_resetCoroutine;
+    
     private MenuStateType m_previousState = MenuStateType.None;
 
-    public MenuStateType CurrentState { get; private set; } = MenuStateType.None;
+    public static MenuStateType CurrentState { get; private set; } = MenuStateType.None;
     public string Username { get; private set; }
 
     private void Awake()
@@ -138,12 +140,17 @@ public class GameManager : MonoBehaviour
     private void OnGameOver(int score)
     {
         m_results.AddHighScore(Username, score);
-        StartCoroutine(ShowResultsDelayed(3f));
+
+        if (m_resetCoroutine == null)
+        {
+            m_resetCoroutine = StartCoroutine(ShowResultsDelayed(3f));
+        }
     }
 
     private IEnumerator ShowResultsDelayed(float delay)
     {
         yield return new WaitForSeconds(delay);
         SetMenuState(MenuStateType.Results);
+        m_resetCoroutine = null;
     }
 }

@@ -8,12 +8,12 @@ public class BasketController : MonoBehaviour
     /// <summary>
     /// T1: item index in inventory array, T2: item data
     /// </summary>
-    public Action<int, MushroomData> onItemAdded;
+    public Action<int, MenuState_Basket.Item> onItemAdded;
     
     /// <summary>
     /// T1: item index in inventory array, T2: item data
     /// </summary>
-    public Action<int, MushroomData> onItemRemoved;
+    public Action<int, MenuState_Basket.Item> onItemRemoved;
     
     private MushroomData[] m_inventory;
     private float[] m_infectionLevels;
@@ -42,7 +42,7 @@ public class BasketController : MonoBehaviour
     /// Fires <see cref="onItemAdded"/> on success.
     /// </summary>
     /// <returns>False if inventory is full.</returns>
-    public bool AddItem(MushroomData data)
+    public bool AddItem(MushroomData data, int score)
     {
         int index = -1;
 
@@ -68,7 +68,7 @@ public class BasketController : MonoBehaviour
             m_previousAddedIDs.Clear();
         }
         
-        onItemAdded?.Invoke(index, data);
+        onItemAdded?.Invoke(index, new MenuState_Basket.Item() { data = data, score =  score } );
         
         return true;
     }
@@ -77,7 +77,7 @@ public class BasketController : MonoBehaviour
     {
         var item = m_inventory[index];
         m_inventory[index] = null;
-        onItemRemoved?.Invoke(index, item);
+        onItemRemoved?.Invoke(index, new MenuState_Basket.Item() { data = item });
     }
 
     public bool IsFirstTimePickup(MushroomData data)

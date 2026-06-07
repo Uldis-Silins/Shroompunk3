@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using MenuStates;
 
 public class InventoryElement : MonoBehaviour
 {
@@ -9,13 +10,13 @@ public class InventoryElement : MonoBehaviour
     [SerializeField] private Image m_icon;
     [SerializeField] private Button m_previewButton;
 
-    private MushroomData m_data;
+    private MenuState_Basket.Item m_item;
 
-    public void SetItem(MushroomData data)
+    public void SetItem(MenuState_Basket.Item item)
     {
-        m_data = data;
+        m_item = item;
         
-        if (data == null)
+        if (item == null)
         {
             m_icon.sprite = null;
             m_icon.enabled = false;
@@ -24,7 +25,7 @@ public class InventoryElement : MonoBehaviour
         }
         else
         {
-            m_icon.sprite = data.Icon;
+            m_icon.sprite = item.data.Icon;
             m_icon.enabled = true;
             m_previewButton.onClick.AddListener(OnPreviewClick);
             m_previewButton.interactable = true;
@@ -33,6 +34,6 @@ public class InventoryElement : MonoBehaviour
 
     private void OnPreviewClick()
     {
-        onPreviewClick?.Invoke(m_data, this);
+        onPreviewClick?.Invoke(m_item.data, this);
     }
 }

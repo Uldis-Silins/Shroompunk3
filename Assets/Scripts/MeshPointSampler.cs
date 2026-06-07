@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging.Abstractions;
 using Random = UnityEngine.Random;
 
 public class MeshPointSampler
 {
     private readonly int m_seed = 12345;
 
-    public List<Vector3> Generate(MeshFilter meshFilter, float minDistance = 1.5f,
-        float maxDistance = 5.0f, int targetPointCount = 200, int maxAttempts = 1000)
+    public List<Vector3> Generate(MeshFilter meshFilter, float minDistance = 1.0f,
+        float maxDistance = 3.0f, int targetPointCount = 200, int maxAttempts = 1000)
     {
         Mesh mesh = meshFilter.sharedMesh;
+        if(mesh == null || mesh.vertices == null) return null;
         List<Vector3> points = new List<Vector3>();
 
         Vector3[] vertices = mesh.vertices;

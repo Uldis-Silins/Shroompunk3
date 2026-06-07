@@ -6,6 +6,12 @@ namespace MenuStates
 {
     public class MenuState_Basket : MenuState_Base
     {
+        public class Item
+        {
+            public int score;
+            public MushroomData data;
+        }
+        
         [SerializeField] private Button m_mapButton;
         [SerializeField] private Button m_gameButton;
         
@@ -47,12 +53,12 @@ namespace MenuStates
             m_previewMenu.onDeleteItem -= OnDeletePreviewItem;
         }
 
-        private void OnItemAdded(int index, MushroomData data)
+        private void OnItemAdded(int index, Item item)
         {
-            m_inventory[index].SetItem(data);
+            m_inventory[index].SetItem(item);
         }
         
-        private void OnItemRemoved(int index, MushroomData data)
+        private void OnItemRemoved(int index, Item item)
         {
             m_inventory[index].SetItem(null);
         }

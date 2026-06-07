@@ -53,8 +53,8 @@ namespace MenuStates
 
             m_startButton.interactable = false;
             m_resultsButton.interactable = false;
-            m_usernameField.text = "";
             m_gameManager.StartNewGame(m_usernameField.text);
+            m_usernameField.text = "";
         }
 
         private void OnResultButtonClick()

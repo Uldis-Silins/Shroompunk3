@@ -144,6 +144,7 @@ namespace MenuStates
             
             m_currentPreviewMushroom = data;
             m_currentGrowthScore = growth;
+            m_gameController.IsInPreview = true;
             InPreview = true;
         }
 
@@ -157,6 +158,7 @@ namespace MenuStates
             m_currentGrowthScore = 0;
             m_yayButton.gameObject.SetActive(false);
             m_nayButton.gameObject.SetActive(false);
+            m_gameController.IsInPreview = false;
         }
 
         public void OnYayButtonClick()
@@ -213,6 +215,11 @@ namespace MenuStates
             m_scorePanel.gameObject.SetActive(false);
             m_gameOverContainer.gameObject.SetActive(true);
             m_bottomPanel.gameObject.SetActive(false);
+
+            if (m_gameController.IsInPreview)
+            {
+                DisablePreview();
+            }
         }
     }
 }

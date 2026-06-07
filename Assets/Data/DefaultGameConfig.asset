@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45cf8f8348a3420da3e5daeb33a30a7b, type: 3}
   m_Name: DefaultGameConfig
   m_EditorClassIdentifier: Assembly-CSharp::GameConfig
-  <Time>k__BackingField: 0.5
+  <Time>k__BackingField: 1

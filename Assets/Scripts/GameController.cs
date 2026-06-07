@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
     private readonly float m_subtrackScoreTime = 1f;
     
     public GameStateType CurrentGameState { get; private set; } = GameStateType.None;
+    public bool IsInPreview { get; set; }
 
     private void Start()
     {
@@ -53,6 +54,8 @@ public class GameController : MonoBehaviour
     {
         if (CurrentGameState == GameStateType.Running)
         {
+            if(GameManager.CurrentState != GameManager.MenuStateType.Game) return;
+            
             m_time -= Time.deltaTime;
             onTimeChanged?.Invoke(m_time);
 
@@ -61,9 +64,19 @@ public class GameController : MonoBehaviour
                 m_time = 0f;
                 m_mushroomSpawner.SpawningEnabled = false;
                 m_vegetationSpawner.SpawningEnabled = false;
-                CurrentGameState = GameStateType.GameOver;
-                m_mushroomSpawner.SetSpawnChance(m_time / m_gameConfig.Time);
+                m_mushroomSpawner.ResetSpawn();
                 onGameOver?.Invoke(m_score);
+                m_mushroomSpawner.DespawnMushrooms();
+                m_vegetationSpawner.DespawnVegetation();
+                m_session.Reset();
+                m_session.enabled = false;
+                m_arCamera.gameObject.SetActive(false);
+                
+                CurrentGameState = GameStateType.GameOver;
+            }
+            else
+            {
+                m_mushroomSpawner.SetSpawnChance(m_time / m_gameConfig.Time);
             }
 
             if (m_scoreTimer <= 0f)
@@ -76,9 +89,9 @@ public class GameController : MonoBehaviour
 
             m_scoreTimer -= Time.deltaTime;
 
-            if (Input.GetMouseButtonDown(0))
+            if (!IsInPreview && Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(m_camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 5f,
+                if (Physics.Raycast(m_camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 0.5f,
                         1 << LayerMask.NameToLayer("Mushroom")))
                 {
                     Mushroom hitMushroom = hit.collider.GetComponent<Mushroom>();
@@ -168,7 +181,7 @@ public class GameController : MonoBehaviour
 
     public void AddMushroom(MushroomData data, int growth)
     {
-        if (m_basketController.AddItem(data))
+        if (m_basketController.AddItem(data, growth))
         {
             float scoreMultiplier = 1f;
 
